@@ -34,7 +34,7 @@ contract Wallet1 {
         // transfer is a built in function
         // we can use it only on address that is payable
         // thas function send funds from one address to an other
-        payable(owner).transfer(amount);
+        payable(msg.sender).transfer(amount);
     }
 
     function hasPermitionToWithdraw(address _address)
