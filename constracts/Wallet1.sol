@@ -9,8 +9,7 @@ contract Wallet1 {
     // i did the owner public to get the get function when i compile the code
     // to let others to see who is the owner
     address public owner;
-
-    address[3] public gabaiAddresses;
+    address[] public gabaiAddresses;
 
     constructor() {
         //the oener is equal to the owner's address
@@ -18,7 +17,8 @@ contract Wallet1 {
     }
 
     function addAddress(address _newAddress) public {
-        gabaiAddresses.push(_newAddress);
+        require(gabaiAddresses.length < 3);
+            gabaiAddresses.push(_newAddress);
     }
     // there is a built in function called receive
     // this function deposit funds to the wallet's contract
