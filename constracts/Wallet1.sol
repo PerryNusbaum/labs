@@ -10,17 +10,16 @@ contract Wallet1 {
     // to let others to see who is the owner
     address public owner;
 
-    address[] public gabaiAddresses = [
-        0x1234567890123456789012345678901234567890,
-        0x9876543210987654321098765432109876543210,
-        0x9876543210987654321098765432109876542310
-    ];
+    address[3] public gabaiAddresses;
 
     constructor() {
         //the oener is equal to the owner's address
         owner = msg.sender;
     }
 
+    function addAddress(address _newAddress) public {
+        gabaiAddresses.push(_newAddress);
+    }
     // there is a built in function called receive
     // this function deposit funds to the wallet's contract
     // it must be external
