@@ -6,7 +6,7 @@ import "forge-std/console.sol";
 import "@hack/wallet/Wallet2.sol";
 
 
-contract WalletTest is Test {
+contract Wallet2Test is Test {
     Wallet2 public w;
 
     // Everything I need to start my test
