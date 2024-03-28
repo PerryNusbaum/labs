@@ -1,0 +1,59 @@
+picture 1
+
+every tomato is a vegetable
+every vegetable is growing
+every tomato is growing
+
+every tomato is a vegetable 
+there isnt a vegetable that is a fruit
+there isnt a tomato that is a fruit
+
+There is a man who is a boy
+every boy is young
+there is a man who is young
+
+There is a man who is a boy
+There is no child who is an adult
+There is a man who is older
+
+picture 2
+
+evrey tomato is a vegetable
+there is not a fruit who is a vegetable
+there is not a tomato ho is a fruit
+
+there is not fruit who is vegetable
+every tomato is a vegetables
+there is not a fruit who is a tomato
+
+there is a man who is older
+there is not a boy who is older
+there is a man who is not a boy
+
+there is a man who is not young
+every boy is young
+there is a man who is a boy
+
+picture 3
+
+every tomato is growing
+every tomato is a vegetable
+there is growing who is vegetables
+
+every boy is a man
+there is not boy who is older
+there is a man that is not older
+
+there is a story who is a song
+every story is to read
+there is a song to read
+
+Each bottle is a receptacle
+There is a plastic bottle
+There is plastic receptacle
+
+
+
+
+
+
