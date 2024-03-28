@@ -1,5 +1,5 @@
 //declarration the file compiler
-pragma solidity ^0.6.6;
+pragma solidity ^0.8.24;
 
 //three slashes used to write documentation,
 // descriptive data for UI elements.
