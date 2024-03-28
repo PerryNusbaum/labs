@@ -37,8 +37,8 @@ function testNotAllowedWithdraw() public {
     address nonPermitted = address(0x5); // Correct variable name
     vm.startPrank(nonPermitted);
     uint256 balanceBefore = address(w).balance; // Use test contract balance
-    w.withdraw(5); // Attempting withdrawal
     vm.expectRevert(); // Expecting a revert due to unauthorized withdrawal
+    w.withdraw(5); // Attempting withdrawal
     uint256 balanceAfter = address(w).balance; // Use test contract balance
     assert(balanceBefore == balanceAfter); // Check contract balance remains unchanged
     vm.stopPrank();
@@ -86,6 +86,7 @@ function testAllowedWithdraw() public {
         old[2] = payable(w.getGabai3());
         uint index = uint(keccak256(abi.encodePacked(block.timestamp, block.prevrandao))) % 3;
         vm.startPrank(other);
+        vm.expectRevert();
         w.changeUser(old[index], newG);
         assert(w.getGabai1() == old[0] && w.getGabai2() == old[1] && w.getGabai3() == old[2]);
         vm.stopPrank();
