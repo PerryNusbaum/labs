@@ -1,0 +1,7 @@
+PUSH1 60 //28
+PUSH1 40 //3C
+ADD //64
+PUSH1 0x80 //80
+DUP1 //64
+POP //80
+LT //0
