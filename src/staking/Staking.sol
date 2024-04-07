@@ -14,11 +14,11 @@ contract Staking{
     
     uint256 public totalSupply = 1000000; 
     
-    constructor (address _stakingToken, address _rewardsToken){
+    constructor (address _stakingToken){
         owner = msg.sender;
-        stakingToken.transfer(address(this),totalSupply);
+        
         stakingToken = IERC20(_stakingToken);
-        rewardsToken = IERC20(_rewardsToken);
+        stakingToken.transfer(address(this),totalSupply);
     }
 
     function deposit(uint amount) external{
