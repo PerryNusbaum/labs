@@ -11,9 +11,8 @@ contract Staking{
     IERC20 public immutable stakingToken;
 
     address public owner;
-
-    mapping (address => mapping (uint => uint)) public usersDeposit;
 //    mapping (address => uint256) public depositTime;
+    mapping (address => uint) numOfDeposit;
     
     uint256 public totalSupply = 1000000; 
     
@@ -29,7 +28,8 @@ contract Staking{
     function deposit(uint amount) external{
         require(amount > 0, "amount = 0");
         stakingToken.transfer(address(this), amount);
-        usersDeposit[msg.sender] += amount;
+        usersDeposit[msg.sender][block.timestamp] = amount;
+        numOfDeposit[msg.sender] += 1;
 //        depositTime[msg.sender] = block.timestamp;
     } 
 
