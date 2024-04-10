@@ -35,7 +35,7 @@ contract Staking is ERC20{
         _;
     }
 
-    function calculateRewards(uint amount) internal returns (uint) {
+    function calculateRewards(uint amount) internal view returns (uint) {
         uint balance = stakingToken.balanceOf(address(this)) - rewardAmount;
         uint percentage = (amount * 100) / balance;
         uint totalReward = (rewardAmount * 2) / 100;
@@ -64,7 +64,7 @@ contract Staking is ERC20{
         // Calculate and transfer rewards
         uint rewardToSend = calculateRewards(amount);
         stakingToken.transferFrom(address(this), msg.sender, rewardToSend + amount * 10 ** uint(decimals()));
-        rewardAmount -= (totalReward * percentage) / 100;
+        rewardAmount -= rewardToSend;
     }
 
     function getBalance() external view returns(uint){
