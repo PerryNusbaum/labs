@@ -11,7 +11,7 @@ contract StakingTest is Test{
     MyERC20 public token;
 
     function setUp() public{
-        token = new MyERC20();
+        token = new MyERC20("MyToken","MTK");
         s = new Staking(address(token));
     } 
 
