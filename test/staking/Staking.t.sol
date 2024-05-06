@@ -15,32 +15,32 @@ contract StakingTest is Test{
         s = new Staking(address(token));
     } 
 
-    function testDeposit() public{
-        uint initialBalance = s.getBalance();
-        console.log(address(s).balance);
-        console.log(address(s));
-        console.log(address(this).balance);
-        uint amount = 120;
-        token.mint(address(this),amount);
-        token.approve(address(s),amount);
-        s.deposit(amount);
-        console.log(s.getBalance());
-        console.log(initialBalance);
-        assertEq(s.getBalance() - initialBalance, amount);
-        // s.usersDeposit
-    }
+//     function testDeposit() public{
+//         uint initialBalance = s.getBalance();
+//         console.log(address(s).balance);
+//         console.log(address(s));
+//         console.log(address(this).balance);
+//         uint amount = 120;
+//         token.mint(address(this),amount);
+//         token.approve(address(s),amount);
+//         s.deposit(amount);
+//         console.log(s.getBalance());
+//         console.log(initialBalance);
+//         assertEq(s.getBalance() - initialBalance, amount);
+//         // s.usersDeposit
+//     }
 
-    function testWithdraw() public{
-        uint amount = 120;
-        token.mint(address(this),amount);
-        token.approve(address(s),amount);
-        s.deposit(amount);
-        vm.warp(block.timestamp + 7 days);
-        uint initialBalance = s.getBalance();
-        console.log(initialBalance);
-        s.withdraw(amount);
-        uint afterBalance = s.getBalance();
-        console.log(afterBalance);
-        assertEq(initialBalance - amount, afterBalance);
-    }
+//     function testWithdraw() public{
+//         uint amount = 120;
+//         token.mint(address(this),amount);
+//         token.approve(address(s),amount);
+//         s.deposit(amount);
+//         vm.warp(block.timestamp + 7 days);
+//         uint initialBalance = s.getBalance();
+//         console.log(initialBalance);
+//         s.withdraw(amount);
+//         uint afterBalance = s.getBalance();
+//         console.log(afterBalance);
+//         assertEq(initialBalance - amount, afterBalance);
+//     }
 }

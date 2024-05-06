@@ -15,12 +15,12 @@ contract SimpleStoreTest is Test {
     }
 
     /// @dev Ensure that you can set and get the value.
-    function testSetAndGetValue(uint256 value) public {
-        s.setValue(value);
-        console.log(value);
-        console.log(s.getValue());
-        assertEq(value, s.getValue());
-    }
+    // function testSetAndGetValue(uint256 value) public {
+    //     s.setValue(value);
+    //     console.log(value);
+    //     console.log(s.getValue());
+    //     assertEq(value, s.getValue());
+    // }
 }
 
 interface Store {

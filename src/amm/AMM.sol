@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
 
-// import "../myCoin/MyERC20.sol";
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "../myCoin/MyERC20.sol";
+// import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 
 contract AMM{
@@ -12,28 +12,31 @@ contract AMM{
     uint public balanceA;
     uint public balanceB;
 
-    ERC20 public immutable A;
-    ERC20 public immutable B;
+    // ERC20 public immutable A;
+    // ERC20 public immutable B;
 
-    // MyERC20 public immutable A;
-    // MyERC20 public immutable B;
+    mapping (address => uint) providers;
+
+    MyERC20 public immutable A;
+    MyERC20 public immutable B;
 
     // constructor(string memory nameA, string memory symbolA, string memory nameB, string memory symbolB) {
-        constructor(address a, address b){
+        constructor(address a, address b,uint amountA, uint amountB){
         owner = msg.sender;
-        // A = new MyERC20(nameA, symbolA);
-        // B = new MyERC20(nameB, symbolB);
-        A = ERC20(a);
-        B = ERC20(b);
-        balanceA = 100;
-        balanceB = 100;
+        A = MyERC20(a);
+        B = MyERC20(b);
+        // A = ERC20(a);
+        // B = ERC20(b);
+        balanceA = amountA;
+        balanceB = amountB;
         A.transferFrom(msg.sender, address(this), balanceA);  
         B.transferFrom(msg.sender, address(this), balanceB);
         // A.mint (address(this), balanceA); 
         // B.mint (address(this), balanceB);    
     }
 
-    function price() public view returns(uint){
+    function price() public returns(uint){
+        total = balanceA * balanceB;
         return total;
     }
 
@@ -53,5 +56,31 @@ contract AMM{
         balanceA = price() / balanceB;
         B.transferFrom(msg.sender, address(this), amountB);
         A.transferFrom(address(this), msg.sender, (initialA - balanceA));
+    }
+
+    function addLiduidity(uint amount) external{
+        require (amount > 0, "it must be greater than 0");
+        uint calc = amount / (balanceA + balanceB);
+        uint amountA = calc * balanceA;
+        uint amountB = calc * balanceB;
+        require(A.balanceOf(msg.sender) > amountA && B.balanceOf(msg.sender) > amountB);
+        balanceA += amountA;
+        balanceB += amountB;
+        A.transfer(address(this), amountA);
+        B.transfer(address(this), amountB);
+        providers[msg.sender] = amount;
+    }
+
+        function removeLiduidity(uint amount) external{
+        require (amount > 0, "it must be greater than 0");
+        require (providers[msg.sender] >= amount, "you don't have enough tokens in the pool");
+        uint calc = amount / (balanceA + balanceB);
+        uint amountA = calc * balanceA;
+        uint amountB = calc * balanceB;
+        balanceA -= amountA;
+        balanceB -= amountB;
+        A.transferFrom(address(this), msg.sender, amountA);
+        B.transferFrom(address(this), msg.sender, amountB);
+        providers[msg.sender] -= amount;
     }
 }
