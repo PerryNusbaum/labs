@@ -5,22 +5,21 @@ pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-
 contract StakingRewards {
     IERC20 public immutable stakingToken;
     IERC20 public immutable rewardsToken;
 
     address public owner;
-    uint256 public duration = 7 days;   // [sec] reward duration
-    uint256 public finish   = 0;        // [sec] finish reward time
-    uint256 public updated;             // [sec] last time rate updated
-    uint256 public rate = 0;            // [per] reward rate per sec
-    uint256 public reward;              // reward per token stored
-    uint256 public staked;              // total staked
+    uint256 public duration = 7 days; // [sec] reward duration
+    uint256 public finish = 0; // [sec] finish reward time
+    uint256 public updated; // [sec] last time rate updated
+    uint256 public rate = 0; // [per] reward rate per sec
+    uint256 public reward; // reward per token stored
+    uint256 public staked; // total staked
 
-    mapping(address => uint256) public paid;    // user reward per token paid
+    mapping(address => uint256) public paid; // user reward per token paid
     mapping(address => uint256) public rewards; // reward to be claimed
-    mapping(address => uint256) public balances;// staked per user
+    mapping(address => uint256) public balances; // staked per user
 
     //i see that they dont give an option to staked twice
 
@@ -49,18 +48,17 @@ contract StakingRewards {
     }
 
     function earned(address guy) public view returns (uint256) {
-        return ((balances[guy] * (accumulated() - paid[guy])) / 1e18)
-                 + rewards[guy];
+        return ((balances[guy] * (accumulated() - paid[guy])) / 1e18) + rewards[guy];
     }
 
     // --- STATE CHANGES
 
     modifier updateReward(address guy) {
-        reward  = accumulated();
+        reward = accumulated();
         updated = lastTime();
         if (guy != address(0)) {
             rewards[guy] = earned(guy);
-            paid[guy]    = reward;
+            paid[guy] = reward;
         }
         _;
     }
@@ -94,13 +92,12 @@ contract StakingRewards {
         duration = _duration;
     }
 
-    function updateRate(uint256 amount) external
-    onlyOwner updateReward(address(0)) {
+    function updateRate(uint256 amount) external onlyOwner updateReward(address(0)) {
         if (block.timestamp >= finish) {
             rate = amount / duration;
         } else {
-            uint remaining = (finish - block.timestamp);
-            uint leftover  = remaining * rate;
+            uint256 remaining = (finish - block.timestamp);
+            uint256 leftover = remaining * rate;
             rate = (amount + leftover) / duration;
         }
         // Ensure the provided reward amount is not more than the balance
@@ -109,10 +106,10 @@ contract StakingRewards {
         // rewardRate in the earned and rewardsPerToken functions;
         // Reward + leftover must be less than 2^256 / 10^18 to
         // avoid overflow.
-        uint balance = rewardsToken.balanceOf(address(this));
+        uint256 balance = rewardsToken.balanceOf(address(this));
         require(rate <= balance / duration, "provided reward too high");
 
-        finish  = block.timestamp + duration;
+        finish = block.timestamp + duration;
         updated = block.timestamp;
     }
 }

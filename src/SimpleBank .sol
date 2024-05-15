@@ -6,4 +6,3 @@ pragma solidity ^0.8.24;
 
 /// @title SimpleBank
 /// @author Perry Nusbaum
-

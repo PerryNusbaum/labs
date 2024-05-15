@@ -43,26 +43,26 @@
 // // function stakeTest() public {
 // //     // Store initial balance of user1
 // //     uint256 initialBalance = user1.balance;
-    
+
 // //     // Start the staking process
 // //     vm.startPrank(user1);
 // //     sr.stake(100 * wad);
-    
+
 // //     // Fast forward time by 2 days
 // //     vm.warp(block.timestamp + 2 days);
-    
+
 // //     // Claim reward
 // //     sr.getReward();
-    
+
 // //     // Calculate reward amount
 // //     uint256 rewardAmount = (172800 * 16) / 10000; // Calculate reward amount as a separate step
-    
+
 // //     // Calculate expected balance after staking and reward claim
 // //     uint256 expectedBalance = initialBalance + rewardAmount;
-    
+
 // //     // Assert the balance of user1
 // //     assertEq(user1.balance, expectedBalance);
-    
+
 // //     // Stop the staking process
 // //     vm.stopPrank();
 // // }
@@ -82,6 +82,4 @@
 //         vm.stopPrank();
 //     }
 
-
 // }
-

@@ -12,6 +12,7 @@ contract Wallet2 {
     address public gabai1;
     address public gabai2;
     address public gabai3;
+
     constructor() {
         //the oener is equal to the owner's address
         owner = msg.sender;
@@ -58,11 +59,11 @@ contract Wallet2 {
     receive() external payable {}
 
     function withdraw(uint256 amount) external {
-        require(msg.sender == owner || msg.sender == gabai1 || msg.sender == gabai2 || msg.sender == gabai3, "you dont have permition");
         require(
-            address(this).balance >= amount,
-            "there is'nt enough funds in the contract"
+            msg.sender == owner || msg.sender == gabai1 || msg.sender == gabai2 || msg.sender == gabai3,
+            "you dont have permition"
         );
+        require(address(this).balance >= amount, "there is'nt enough funds in the contract");
         // transfer is a built in function
         // we can use it only on address that is payable
         // thas function send funds from one address to an other

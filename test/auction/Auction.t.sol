@@ -7,7 +7,6 @@ import "@hack/auction/Auction.sol";
 import "@hack/myCoin/MyERC721.sol";
 import "@hack/myCoin/MyERC20.sol";
 
-
 contract AuctionTest is Test {
     Auction public a;
     address user;
@@ -16,7 +15,7 @@ contract AuctionTest is Test {
     function setUp() public {
         token = new MyERC20("token", "t");
         nft = new MyERC721();
-        a = new Auction(10, address(token), address(nft));
+        a = new Auction(100, address(token), address(nft));
         user = vm.addr(1212);
     }
 
@@ -48,6 +47,41 @@ contract AuctionTest is Test {
         assertEq(
             a.bidders(user),
             100,
+            "error! the amount in the auction not match"
+        );
+        vm.stopPrank();
+    }
+
+    function testFuzz_Proposal(uint amount1, uint amount2) public {
+        vm.assume(amount1>0 && amount2 > 0);
+        vm.startPrank(user);
+        token.mint(address(user), amount1);
+        token.approve(address(a), amount1);
+        a.Proposal(amount1);
+        address w = a.winner();
+        assertEq(w, user, "error! the user is not the winner");
+        assertEq(
+            token.balanceOf(address(user)),
+            0,
+            "error! the amount not match"
+        );
+        assertEq(
+            a.bidders(user),
+            amount1,
+            "error! the amount in the auction not match"
+        );
+        token.mint(address(user),amount2);
+        token.approve(address(a), amount2);
+        a.Proposal(amount2);
+        assertEq(w, user, "error! the user is not the winner");
+        assertEq(
+            token.balanceOf(address(user)),
+            0,
+            "error! the amount not match"
+        );
+        assertEq(
+            a.bidders(user),
+            amount1 + amount2,
             "error! the amount in the auction not match"
         );
         vm.stopPrank();
