@@ -18,30 +18,24 @@ contract Wallet1 {
 
     function addAddress(address _newAddress) public {
         require(gabaiAddresses.length < 3);
-            gabaiAddresses.push(_newAddress);
+        gabaiAddresses.push(_newAddress);
     }
     // there is a built in function called receive
     // this function deposit funds to the wallet's contract
     // it must be external
+
     receive() external payable {}
 
     function withdraw(uint256 amount) external {
         require(hasPermitionToWithdraw(msg.sender), "you dont have permition");
-        require(
-            address(this).balance >= amount,
-            "there is'nt enough funds in the contract"
-        );
+        require(address(this).balance >= amount, "there is'nt enough funds in the contract");
         // transfer is a built in function
         // we can use it only on address that is payable
         // thas function send funds from one address to an other
         payable(msg.sender).transfer(amount);
     }
 
-    function hasPermitionToWithdraw(address _address)
-        internal
-        view
-        returns (bool)
-    {
+    function hasPermitionToWithdraw(address _address) internal view returns (bool) {
         if (owner == _address) {
             return true;
         }

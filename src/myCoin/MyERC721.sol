@@ -5,10 +5,10 @@ pragma solidity ^0.8.20;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 contract MyERC721 is ERC721 {
-    constructor() ERC721("NFTtoken", "NFT") {
-        
-    }
+    constructor() ERC721("NFTtoken", "NFT") {}
+
     function mint(address to, uint256 amount) public {
         _mint(to, amount);
     }
 }
+
