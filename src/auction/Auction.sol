@@ -8,11 +8,11 @@ contract Auction {
     bool public flagFinish;
 
     address public owner;
-    address winner;
+    address public winner;
 
     uint public finishTime;
 
-    mapping(address=>uint) bidders;
+    mapping(address=>uint) public bidders;
 
     address [] public addresses;
 
@@ -30,7 +30,7 @@ contract Auction {
         flagFinish=false;
     }
 
-    function Proposal(uint amount) external{  
+    function proposal(uint amount) external{  
         require(amount>bidders[winner],"not enough money");
         if(block.timestamp<finishTime){
             bidders[msg.sender]=amount;
@@ -47,7 +47,7 @@ contract Auction {
     function cancelation() external{
         require(winner!=msg.sender,"the winner cant cancel");
         if(block.timestamp<finishTime){
-            myToken.transferFrom(msg.sender,address(this),bidders[msg.sender]);
+            myToken.transfer(msg.sender,bidders[msg.sender]);
             bidders[msg.sender]=0;
         }
         else if(!flagFinish){
