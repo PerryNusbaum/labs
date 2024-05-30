@@ -2,7 +2,7 @@
 pragma solidity ^0.8.24;
 
 import "../myCoin/MyERC20.sol";
-// import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "openzeppelin-contracts/contracts/token/ERC20/ERC20.sol";
 
 contract AMM {
     address public owner;

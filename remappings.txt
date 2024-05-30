@@ -11,3 +11,5 @@ foundry-huff/=lib/foundry-huff/src/
 openzeppelin-contracts/=lib/openzeppelin-contracts/
 solidity-stringutils/=lib/foundry-huff/lib/solidity-stringutils/
 stringutils/=lib/foundry-huff/lib/solidity-stringutils/
+openzeppelin-contracts/=lib/openzeppelin-contracts/contracts/
+chainlink/=lib/chainlink/contracts/

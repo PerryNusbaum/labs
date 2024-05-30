@@ -1,9 +1,8 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.7;
-
-import "openzeppelin-contracts/token/ERC20/extensions/ERC20Burnable.sol";
-import "openzeppelin-contracts/token/ERC20/IERC20.sol";
-import "openzeppelin-contracts/access/Ownable.sol";
+import "openzeppelin-contracts/contracts/token/ERC20/ERC20Burnable.sol";
+import "openzeppelin-contracts/contracts/token/ERC20/IERC20.sol";
+import "openzeppelin-contracts/contracts/access/Ownable.sol";
 import "chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
 import "../interfaces/ILendingPool.sol";
