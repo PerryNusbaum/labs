@@ -3,7 +3,7 @@
 // Code is a stripped down version of Synthetix
 pragma solidity ^0.8.20;
 
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "openzeppelin-contracts/token/ERC20/IERC20.sol";
 
 contract StakingRewards {
     IERC20 public immutable stakingToken;
