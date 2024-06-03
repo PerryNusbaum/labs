@@ -1,47 +1,49 @@
-// // SPDX-License-Identifier: MIT
-// pragma solidity ^0.8.24;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.24;
 
-// contract ProxyAdmin {
-//     address public owner;
+import "./Proxy.sol";
 
-//     constructor() {
-//         owner = msg.sender;
-//     }
+contract ProxyAdmin {
+    address public owner;
 
-//     modifier onlyOwner() {
-//         require(msg.sender == owner, "not owner");
-//         _;
-//     }
+    constructor() {
+        owner = msg.sender;
+    }
 
-//     function getProxyAdmin(address proxy) external view returns (address) {
-//         (bool ok, bytes memory res) =
-//             proxy.staticcall(abi.encodeCall(Proxy.admin, ()));
-//         require(ok, "call failed");
-//         return abi.decode(res, (address));
-//     }
+    modifier onlyOwner() {
+        require(msg.sender == owner, "not owner");
+        _;
+    }
 
-//     function getProxyImplementation(address proxy)
-//         external
-//         view
-//         returns (address)
-//     {
-//         (bool ok, bytes memory res) =
-//             proxy.staticcall(abi.encodeCall(Proxy.implementation, ()));
-//         require(ok, "call failed");
-//         return abi.decode(res, (address));
-//     }
+    function getProxyAdmin(address proxy) external view returns (address) {
+        (bool ok, bytes memory res) =
+            proxy.staticcall(abi.encodeCall(Proxy.admin, ()));
+        require(ok, "call failed");
+        return abi.decode(res, (address));
+    }
 
-//     function changeProxyAdmin(address payable proxy, address admin)
-//         external
-//         onlyOwner
-//     {
-//         Proxy(proxy).changeAdmin(admin);
-//     }
+    function getProxyImplementation(address proxy)
+        external
+        view
+        returns (address)
+    {
+        (bool ok, bytes memory res) =
+            proxy.staticcall(abi.encodeCall(Proxy.implementation, ()));
+        require(ok, "call failed");
+        return abi.decode(res, (address));
+    }
 
-//     function upgrade(address payable proxy, address implementation)
-//         external
-//         onlyOwner
-//     {
-//         Proxy(proxy).upgradeTo(implementation);
-//     }
-// }
+    function changeProxyAdmin(address payable proxy, address admin)
+        external
+        onlyOwner
+    {
+        Proxy(proxy).changeAdmin(admin);
+    }
+
+    function upgrade(address payable proxy, address implementation)
+        external
+        onlyOwner
+    {
+        Proxy(proxy).upgradeTo(implementation);
+    }
+}
