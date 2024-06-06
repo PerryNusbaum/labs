@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // https://medium.com/@marketing.blockchain/how-to-create-a-multisig-wallet-in-solidity-cfb759dbdb35
-pragma solidity ^0.8.20;
+pragma solidity 0.8.19;
 
 import "@hack/myCoin/MyERC721.sol";
 import "@hack/myCoin/MyERC20.sol";
