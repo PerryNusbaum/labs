@@ -15,7 +15,7 @@ contract ContractTest is Test{
         ERC20Contract.mint(1000);
         ERC20Contract.transfer(address(alice),1000);
 
-        vm.prand(alice);
+        vm.prank(alice);
 
         ERC20Contract.approve(address(eve),type(uint256).max);
 
@@ -46,28 +46,28 @@ interface IERC20{
 
     function allowance(address owner, address spender) external view returns(uint);
 
-    function approve(address spender, uint amount) external returns (bool)
-    function transferFrom(address spender, address recipient, uint amount) external returns(uint);
+    function approve(address spender, uint amount) external returns (bool);
+    function transferFrom(address spender, address recipient, uint amount) external returns(bool);
 
     event Transfer(address indexed from, address indexed to, uint value);
-    event Approval(address indexed owner, address indexed spender, uint value)
+    event Approval(address indexed owner, address indexed spender, uint value);
 }
 
 contract ERC20 is IERC20{
     uint public totalSupply;
     mapping (address => uint) public balanceOf;
-    mapping (address => mapping(address => uint)) public allwance;
+    mapping (address => mapping(address => uint)) public allowance;
     string public name = "Test example";
     string public symbol = "Test";
     uint8 public decimals = 18;
 
-    function totalSupply() external view returns(uint){
-        return totalSupply;
-    }
+    // function totalSupply() external view returns(uint){
+    //     return totalSupply;
+    // }
 
-    function balanceOf(address account) external view returns(uint){
-        return balanceOf[account];
-    }
+    // function balanceOf(address account) external view returns(uint){
+    //     return balanceOf[account];
+    // }
 
     function transfer(address recipient, uint amount) external returns(bool){
         balanceOf[msg.sender] -= amount;

@@ -11,6 +11,6 @@ contract CounterV1 {
         count += 1;
     }
 
-    add.delegatecall
+    // add.delegatecall
 }
 
