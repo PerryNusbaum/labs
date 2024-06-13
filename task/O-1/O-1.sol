@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.18;
 
-contract Name{
+contract O-1{
     function _name() internal pure returns (string memory) {
         // Return the name of the contract.
         assembly {
