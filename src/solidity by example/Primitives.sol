@@ -12,7 +12,7 @@ contract Primitives{
     int256 public i256 = 456;
     int256 public i = -123;
 
-    int256 public minInt = type(int256).mim;
+    int256 public minInt = type(int256).min;
     int256 public maxInt = type(int256).max;
 
     address public addr = 0xCA35b7d915458EF540aDe6068dFe2F44E8fa733c;
