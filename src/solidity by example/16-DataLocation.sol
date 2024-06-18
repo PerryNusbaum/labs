@@ -9,7 +9,7 @@ contract DataLocation {
         uint256 foo;
     }
 
-    mapping(uint256 => MyStruct) MyStructs;
+    mapping(uint256 => MyStruct) myStructs;
     function f() public {
         _f(arr, map, myStructs[1]);
 
