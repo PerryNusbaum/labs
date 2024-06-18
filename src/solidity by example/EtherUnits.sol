@@ -9,5 +9,5 @@ contract EtherUnits {
     bool public isOneGwei = (oneGwei == 1e9);
 
     uint256 public oneEther = 1 ether;
-    bool public isOneEther = (oneEhter == 1e18);
+    bool public isOneEther = (oneEther == 1e18);
 }
